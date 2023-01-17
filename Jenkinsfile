@@ -10,7 +10,9 @@ pipeline {
         
          stage('SonarQube analysis') {
              withSonarQubeEnv(credentialsId: 'sonar_token1'){
-                 echo 'Sonar scanning'
+                 steps {
+                      echo 'Sonar scanning'
+                     }
              }
         }
         
