@@ -17,5 +17,21 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage("SonarQube analysis") {
+    steps {
+        script {
+            withSonarQubeEnv('SonarQube Server') {
+                sh '''
+                  ${JENKINS_HOME}/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner/bin/sonar-scanner \
+                   -Dsonar.host.url=http://localhost:9000
+                   -Dsonar.login=ded6582fd7233d53859b6182ca11484ed741513b
+                   -Dsonar.projectKey=23735_competencyTracker:master
+                   -Dsonar.projectName=23735_competencyTracker
+                '''
+            }
+        }
+    }
+}
+        
     }
 }
