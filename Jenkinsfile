@@ -20,7 +20,7 @@ pipeline {
         stage("SonarQube analysis") {
     steps {
         script {
-            withSonarQubeEnv('SonarQube Server') {
+            withSonarQubeEnv('SonarQubeScanner') {
                 sh '''
                   ${JENKINS_HOME}/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner/bin/sonar-scanner \
                    -Dsonar.host.url=http://localhost:9000
