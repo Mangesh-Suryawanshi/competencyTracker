@@ -20,16 +20,10 @@ pipeline {
         stage("SonarQube analysis") {
     steps {
         script {
-            withSonarQubeEnv('SonarQubeScanner-7.9.1') {
-                bat '''
-                  ${JENKINS_HOME}/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner/bin/sonar-scanner \
-                   -Dsonar.host.url=http://localhost:9000
-                   -Dsonar.login=ded6582fd7233d53859b6182ca11484ed741513b
-                   -Dsonar.projectKey=23735_competencyTracker:master
-                   -Dsonar.projectName=23735_competencyTracker
-                '''
-            }
-            
+            def scannerHome = tool 'SonarScanner 4.3.0.2102';
+            withSonarQubeEnv('SonarQubeScanner-7.9.1') 
+            bat "${scannerHome}/bin/sonar-scanner"
+          
         }
     }
 }
