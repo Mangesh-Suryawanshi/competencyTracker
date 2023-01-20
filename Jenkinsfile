@@ -19,5 +19,21 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('SonarQube_Analysis')
+        {
+            steps{
+                script {
+                    scannerHome = tool 'SonarQubeScanner'
+                }
+                withSonarQubeEnv('sonar'){
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
+                
     }
 }
+        
+        
+        
+        
