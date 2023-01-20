@@ -21,7 +21,7 @@ pipeline {
     steps {
         script {
             withSonarQubeEnv('SonarQubeScanner-7.9.1') {
-                sh '''
+                bat '''
                   ${JENKINS_HOME}/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner/bin/sonar-scanner \
                    -Dsonar.host.url=http://localhost:9000
                    -Dsonar.login=ded6582fd7233d53859b6182ca11484ed741513b
@@ -29,6 +29,7 @@ pipeline {
                    -Dsonar.projectName=23735_competencyTracker
                 '''
             }
+            
         }
     }
 }
