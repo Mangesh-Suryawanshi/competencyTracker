@@ -1,10 +1,12 @@
+
 pipeline {
-    agent any
-    tools {
-        maven "Maven"
-        jdk "Jdk"
-    } 
-  stages {
+    agent any     stages {
+        stage('Build') {
+            steps {
+              echo 'Building..'
+            }
+        }
+      stages {
     
         stage('Compile'){
             steps{
@@ -12,11 +14,21 @@ pipeline {
              bat "mvn clean install"
             }
         }
-        stage('Sonar Analysis') {
+         stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     bat 'mvn sonar:sonar'
                 }
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
