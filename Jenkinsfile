@@ -1,5 +1,8 @@
 node{
     stages {
+        stage('Clone the Git') {
+    git 'https://github.com/Mangesh-Suryawanshi/competencyTracker.git'
+  }
         stage('Build') {
             steps {
               echo 'Building..'
@@ -25,6 +28,7 @@ node{
       -D sonar.projectKey=jenkinsonarqube \
       -D sonar.host.url=http://localhost:9000 
           }    
+         }
 
 }
 }
