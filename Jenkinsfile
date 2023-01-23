@@ -1,34 +1,36 @@
-node{
+pipeline{
+  agent any
+ tools{
+  maven "Maven"
+  jdk "Jdk"
+ }
  
-        stage('Clone the Git') {
-    git 'https://github.com/Mangesh-Suryawanshi/competencyTracker.git'
-  }
-        stage('Build') {
-            steps {
-              echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-        
-         stage('SonarQube analysis') {
-    def scannerHome = tool 'SonarQubeScanner-7.9.1';
-    withSonarQubeEnv('SonarQubeServer') {
-      bat "${scannerHome}/bin/sonar-scanner \
-     -D sonar.login=admin \
-      -D sonar.password=admin \
-      -D sonar.projectKey=jenkinsonarqube \
-      -D sonar.host.url=http://localhost:9000/"
-          }    
-         }
 
-
+  
+  
+ stage('Initialize'){
+            steps{
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
+            }
+        }
+         
+       stage('Compile'){
+            steps{
+                echo "COMPILE"
+             bat "mvn clean install"
+            }
+        }
+        stage('Sonar Analysis') {
+            steps {
+                // use the SonarQube Scanner to analyze the project
+                withSonarQubeEnv('SonarQubeScanner-7.9.1') {
+                    bat 'mvn sonar:sonar'
+                }
+            }
+        }
+  
+  
+  
+  
 }
