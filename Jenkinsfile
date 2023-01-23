@@ -19,11 +19,11 @@ pipeline {
         }
         
         stage('SonarQube analysis') {
-   
+            steps{
     withSonarQubeEnv('My SonarQube Server') { 
       bat 'mvn clean package sonar:sonar'
     }
-        
+        }
         
        
     
