@@ -1,19 +1,21 @@
 
 pipeline {
-    agent any     stages {
+    agent any  
+      
+      stages {
         stage('Build') {
             steps {
               echo 'Building..'
             }
         }
-      stages {
-    
+            
         stage('Compile'){
             steps{
                 echo "COMPILE"
              bat "mvn clean install"
             }
         }
+            
          stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -21,11 +23,13 @@ pipeline {
                 }
             }
         }
+            
         stage('Test') {
             steps {
                 echo 'Testing..'
             }
         }
+            
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
