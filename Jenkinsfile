@@ -8,13 +8,7 @@ pipeline {
             }
         }
         
-         stage('SonarQube analysis') {
-             withSonarQubeEnv(credentialsId: 'sonar_token1'){
-                 steps {
-                      echo 'Sonar scanning'
-                     }
-             }
-        }
+
         
         stage('Test') {
             steps {
