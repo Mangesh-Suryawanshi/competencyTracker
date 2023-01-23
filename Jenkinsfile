@@ -1,15 +1,18 @@
-pipeline{
-  agent any
-
- stages{
- stage('Initialize'){
+pipeline {
+    agent any
+    tools {
+        maven "Maven"
+        jdk "Jdk"
+    }          stages {
+   
+        stage('Initialize'){
             steps{
                 echo "PATH = ${M2_HOME}/bin:${PATH}"
                 echo "M2_HOME = /opt/maven"
             }
         }
-         
-       stage('Compile'){
+//       
+        stage('Compile'){
             steps{
                 echo "COMPILE"
              bat "mvn clean install"
@@ -18,13 +21,10 @@ pipeline{
         stage('Sonar Analysis') {
             steps {
                 // use the SonarQube Scanner to analyze the project
-                withSonarQubeEnv('SonarQubeScanner-7.9.1') {
+                withSonarQubeEnv('SONAR-SCANNER') {
                     bat 'mvn sonar:sonar'
                 }
             }
         }
-  
-  
-  }
-  
+    }
 }
