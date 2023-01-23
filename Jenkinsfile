@@ -3,15 +3,16 @@ pipeline {
     tools {
         maven "Maven"
         jdk "Jdk"
-    }          stages {
-
+    } 
+  stages {
         stage('Initialize'){
             steps{
                 echo "PATH = ${M2_HOME}/bin:${PATH}"
                 echo "M2_HOME = /opt/maven"
             }
         }
-stage('Compile'){
+    
+        stage('Compile'){
             steps{
                 echo "COMPILE"
              bat "mvn clean install"
@@ -19,7 +20,6 @@ stage('Compile'){
         }
         stage('Sonar Analysis') {
             steps {
-             
                 withSonarQubeEnv('SonarQube') {
                     bat 'mvn sonar:sonar'
                 }
