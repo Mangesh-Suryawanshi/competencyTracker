@@ -1,19 +1,39 @@
 pipeline {
-    agent any 
-    stages {
-        stage('Build') { 
-            steps {
-                // 
+    agent any
+    tools {
+        maven "Maven"
+        jdk "Jdk"
+    }          stages {
+//         stage('Checkout') {
+//             steps {
+//                 // Get some code from a GitHub repository
+//                 git 'https://github.com/Mangesh-Suryawanshi/competencyTracker.git'
+//             }
+//         }
+        stage('Initialize'){
+            steps{
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
             }
         }
-        stage('Test') { 
-            steps {
-                // 
+//         stage('Compile'){
+//             steps{
+//                 echo "COMPILE"
+//              bat "mvn -Dmaven.test.failure.ignore=true clean package"
+//             }
+//         }
+        stage('Compile'){
+            steps{
+                echo "COMPILE"
+             bat "mvn clean install"
             }
         }
-        stage('Deploy') { 
+        stage('Sonar Analysis') {
             steps {
-                // 
+                // use the SonarQube Scanner to analyze the project
+                withSonarQubeEnv('SonarQubeScanner') {
+                    bat 'mvn sonar:sonar'
+                }
             }
         }
     }
