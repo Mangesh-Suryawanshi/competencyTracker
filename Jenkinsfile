@@ -1,5 +1,5 @@
 pipeline {
-    agent abhipatil
+    agent any
     tools {
         maven "Maven"
         jdk "Jdk"
