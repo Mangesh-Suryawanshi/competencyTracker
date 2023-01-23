@@ -1,6 +1,4 @@
-pipeline {
-    agent any
-
+node{
     stages {
         stage('Build') {
             steps {
@@ -18,14 +16,19 @@ pipeline {
             }
         }
         
-        stage('SonarQube analysis') {
-            steps{
-          
-    withSonarQubeEnv(installationName: 'SonarQubeServer') { // You can override the credential to be used
-      bat 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
- 
+         stage('SonarQube analysis') {
+    def scannerHome = tool 'SonarQubeScanner-7.9.1';
+    withSonarQubeEnv('SonarQubeServer') {
+      bat "${scannerHome}/bin/sonar-scanner \
+     -D sonar.login=admin \
+      -D sonar.password=admin \
+      -D sonar.projectKey=jenkinsonarqube \
+    
+      -D sonar.host.url=http://localhost:9000
     }
-        }
+        
+        
+        
         
        
     
