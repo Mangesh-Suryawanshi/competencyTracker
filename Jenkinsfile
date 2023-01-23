@@ -1,5 +1,5 @@
 node{
-    stages {
+ 
         stage('Clone the Git') {
     git 'https://github.com/Mangesh-Suryawanshi/competencyTracker.git'
   }
@@ -30,5 +30,5 @@ node{
           }    
          }
 
-}
+
 }
