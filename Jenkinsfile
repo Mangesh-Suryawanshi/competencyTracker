@@ -1,6 +1,6 @@
 pipeline {
 agent any
-    tools {
+tools {
         maven "Maven"
         jdk "Jdk"
     }          
@@ -10,8 +10,7 @@ stages
                 echo "PATH = ${M2_HOME}/bin:${PATH}"
                 echo "M2_HOME = /opt/maven"
             }
-        }
-//       
+        }      
         stage('Compile'){
             steps{
                 echo "COMPILE"
