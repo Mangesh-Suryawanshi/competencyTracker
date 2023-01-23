@@ -17,16 +17,11 @@ pipeline{
                 echo "M2_HOME = /opt/maven"
             }
         }
-//         stage('Compile'){
-//             steps{
-//                 echo "COMPILE"
-//              bat "mvn -Dmaven.test.failure.ignore=true clean package"
-//             }
-//         }
+
         stage('Compile'){
             steps{
                 echo "COMPILE"
-             bat "mvn clean install"
+             bat 'mvn clean install'
             }
         }
         stage('Sonar Analysis') {
