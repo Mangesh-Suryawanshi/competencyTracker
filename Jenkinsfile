@@ -19,9 +19,9 @@ pipeline {
         }
         
         stage('SonarQube analysis') {
-    def scannerHome = tool 'SonarQubeScanner-7.9.1';
+   
     withSonarQubeEnv('My SonarQube Server') { 
-      bat "${scannerHome}/bin/sonar-scanner"
+      bat 'mvn clean package sonar:sonar'
     }
         
         
