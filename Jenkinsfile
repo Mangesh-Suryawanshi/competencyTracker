@@ -24,10 +24,10 @@
 
 pipeline {
     agent any
-    tools {
-        maven "Maven"
-        jdk "Jdk"
-    }          stages {
+//     tools {
+//         maven "Maven"
+//         jdk "Jdk"
+//     }          stages {
 //         stage('Checkout') {
 //             steps {
 //                 // Get some code from a GitHub repository
